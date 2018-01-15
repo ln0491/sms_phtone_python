@@ -53,7 +53,37 @@ to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
 
-def get_bangalore_numbers(input_list):
+#1
+
+def get_form_bangalore(input_list):
+    temp_list = set()
+    for call in input_list:
+        if str(call[0]).startswith("(080)"):
+            temp_list.add(call[1])
+    return temp_list
+
+from_bangalore_list=get_form_bangalore(calls)
+
+area_list=list()
+for num in from_bangalore_list:
+    if  str(num).startswith("(0"):
+        temp=str(num)[0:str(num).index(")")+1]
+        area_list.append(temp)
+    elif str(num).split(" ") !=None and (str(num).startswith("7") or str(num).startswith("8") or str(num).startswith("9")):
+        temp=str(num).split(" ")[0]
+        area_list.append(temp)
+    elif str(num).startswith("140"):
+        area_list.append(str(num))
+
+# sorted and no duplicates
+result_set=set(sorted(area_list))
+# result and print
+for result in result_set:
+    print("The numbers called by people in Bangalore have codes:{}".format(result))
+
+
+# 2
+def get_revice_numbers(input_list):
     '''
     获取以(080)开头的主叫号码
     :param input_list:  这是个列表
@@ -61,21 +91,9 @@ def get_bangalore_numbers(input_list):
     '''
     temp_list = set()
     for call in input_list:
-        if str(call[0]).startswith("(080)"):
+        if str(call[0]).startswith("(080)") and str(call[1]).startswith("(080)"):
             temp_list.add(call[1])
     return temp_list
 
-
-bangalore_list=get_bangalore_numbers(calls)
-#1
-for number in bangalore_list:
-    print("The numbers called by people in Bangalore have codes:{}".format(number))
-
-
-# 2
-count =0
-for number in bangalore_list:
-    if str(number).startswith("(080)"):
-        count+=1
-
-print("{} percent of calls from fixed lines in Bangalore are callsto other fixed lines in Bangalore.".format('%.2f' %(count/len(bangalore_list)) ))
+bangalor_list=get_revice_numbers(calls)
+print("{} percent of calls from fixed lines in Bangalore are callsto other fixed lines in Bangalore.".format('%.2f' %(len(bangalor_list)/len(calls)*100) ))
