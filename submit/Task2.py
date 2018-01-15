@@ -37,13 +37,28 @@ dictionary, add it and set its value to be the given value.
 """
 
 records=dict()
+print(calls)
+
 for call in calls:
+    # send phone time
     if call[0] in records:
         records[call[0]]+=int(call[3])
     else:
         records[call[0]]=int(call[3])
+    # revice phone time
+    if call[1] in records:
+        records[call[1]] += int(call[3])
+    else:
+        records[call[1]] = int(call[3])
 
-print(records)
+#print(records)
+# revice phone time
+# for call in calls:
+#     if call[1] in records:
+#         records[call[1]]+=int(call[3])
+#     else:
+#         records[call[1]]=int(call[3])
+
 # sorted get list by value asc
 list_sort=sorted(records.items(),key=lambda item:item[1])
 # last one is value max
