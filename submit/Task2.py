@@ -37,8 +37,6 @@ dictionary, add it and set its value to be the given value.
 """
 
 records=dict()
-print(calls)
-
 for call in calls:
     # send phone time
     if call[0] in records:
