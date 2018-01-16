@@ -52,5 +52,10 @@ for text in  texts:
 '''
 marketing_list=sorted(set(send_phone_list-revice_phone_list-no_sms_list))
 # 3 result
+
+'''
+仅在开头输出一次
+'''
+print("These numbers could be telemarketers:")
 for market_phone in marketing_list:
-    print("These numbers could be telemarketers: {} ".format(market_phone))
+    print(market_phone)
