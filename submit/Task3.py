@@ -69,21 +69,41 @@ for num in from_bangalore_list:
     if  str(num).startswith("(0"):
         temp=str(num)[0:str(num).index(")")+1]
         area_list.append(temp)
-    elif str(num).split(" ") !=None and (str(num).startswith("7") or str(num).startswith("8") or str(num).startswith("9")):
-        temp=str(num).split(" ")[0]
+    elif " " in num:
+        '''
+        判断号码中有无空格
+        差截取前4位
+        '''
+        temp=num[0:4]
         area_list.append(temp)
-    elif str(num).startswith("140"):
-        area_list.append(str(num))
 
 # sorted and no duplicates
-result_set=set(sorted(area_list))
+'''
+先去重，再排序
+'''
+result_set=sorted(set(area_list))
 # result and print
 for result in result_set:
     print("The numbers called by people in Bangalore have codes:{}".format(result))
 
 
 # 2
+    '''
+    获取以(080)开头的主叫号码并以 (080)接听的电话
+    :param input_list:  这是个列表
+    :return: 一个集合
+    '''
 def get_revice_numbers(input_list):
+
+    temp_list = set()
+    for call in input_list:
+        if str(call[0]).startswith("(080)") and str(call[1]).startswith("(080)"):
+            temp_list.add(call[1])
+    return temp_list
+'''
+获取所有 bangalor打出的电话
+'''
+def get_send_numbers(input_list):
     '''
     获取以(080)开头的主叫号码
     :param input_list:  这是个列表
@@ -91,9 +111,11 @@ def get_revice_numbers(input_list):
     '''
     temp_list = set()
     for call in input_list:
-        if str(call[0]).startswith("(080)") and str(call[1]).startswith("(080)"):
+        if str(call[0]).startswith("(080)") :
             temp_list.add(call[1])
     return temp_list
 
-bangalor_list=get_revice_numbers(calls)
-print("{} percent of calls from fixed lines in Bangalore are callsto other fixed lines in Bangalore.".format('%.2f' %(len(bangalor_list)/len(calls)*100) ))
+bangalor_revice_list=get_revice_numbers(calls)
+bangalor_send_list=get_send_numbers(calls)
+
+print("{} percent of calls from fixed lines in Bangalore are callsto other fixed lines in Bangalore.".format('%.2f' %(len(bangalor_revice_list)/len(bangalor_send_list)*100) ))
