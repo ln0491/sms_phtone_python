@@ -83,22 +83,26 @@ for num in from_bangalore_list:
 '''
 result_set=sorted(set(area_list))
 # result and print
+'''
+只在开始输出一次
+'''
+print("The numbers called by people in Bangalore have codes:")
 for result in result_set:
-    print("The numbers called by people in Bangalore have codes:{}".format(result))
+    print(result)
 
 
 # 2
     '''
     获取以(080)开头的主叫号码并以 (080)接听的电话
     :param input_list:  这是个列表
-    :return: 一个集合
+    :return: 一个列表 不在去重
     '''
 def get_revice_numbers(input_list):
 
-    temp_list = set()
+    temp_list = list()
     for call in input_list:
         if str(call[0]).startswith("(080)") and str(call[1]).startswith("(080)"):
-            temp_list.add(call[1])
+            temp_list.append(call[1])
     return temp_list
 '''
 获取所有 bangalor打出的电话
@@ -107,12 +111,12 @@ def get_send_numbers(input_list):
     '''
     获取以(080)开头的主叫号码
     :param input_list:  这是个列表
-    :return: 一个集合
+    :return: 一个列表 不在去重
     '''
-    temp_list = set()
+    temp_list = list()
     for call in input_list:
         if str(call[0]).startswith("(080)") :
-            temp_list.add(call[1])
+            temp_list.append(call[1])
     return temp_list
 
 bangalor_revice_list=get_revice_numbers(calls)
