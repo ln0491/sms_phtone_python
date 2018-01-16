@@ -47,7 +47,10 @@ for text in  texts:
     no_sms_list.add(text[0])
     no_sms_list.add(text[1])
 # 集合去重相减 ：
-marketing_list=set(sorted(send_phone_list-revice_phone_list-no_sms_list))
+'''
+先去重，再排序
+'''
+marketing_list=sorted(set(send_phone_list-revice_phone_list-no_sms_list))
 # 3 result
 for market_phone in marketing_list:
     print("These numbers could be telemarketers: {} ".format(market_phone))
